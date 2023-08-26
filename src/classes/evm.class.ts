@@ -103,6 +103,16 @@ class EVM {
         ];
     }
 
+    getMethodHashes(): string[] {
+        return [
+            ...new Set(
+                this.getOpcodes()
+                    .filter(opcode => opcode.name === 'PUSH4')
+                    .map(opcode => (opcode.pushData ? opcode.pushData.toString('hex') : ''))
+            )
+        ];
+    }
+
     getEvents(): string[] {
         return [
             ...new Set(
